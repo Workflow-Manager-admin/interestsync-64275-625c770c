@@ -233,15 +233,65 @@ body {
 
 /* --- Door Buttons for Home Page --- */
 .door-buttons-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-  gap: 36px 28px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 32px;
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 48px 8px 24px 8px;
-  justify-items: center;
 }
+
+@media (max-width: 1100px) {
+  .door-buttons-container {
+    gap: 24px;
+    max-width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (max-width: 950px) {
+  .door-buttons-container {
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+  }
+}
+@media (max-width: 800px) {
+  .door-buttons-container {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 26px;
+  }
+}
+
+@media (max-width: 725px) {
+  .door-buttons-container {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+@media (max-width: 670px) {
+  .door-buttons-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (max-width: 615px) {
+  .door-buttons-container {
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+  }
+}
+
 
 .door-btn {
   border: none;
@@ -367,19 +417,14 @@ body {
 
 /* Responsive */
 @media (max-width: 650px) {
-  .door-buttons-container {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 14px;
-    padding: 28px 0 0 0;
-  }
   .door-btn {
-    width: 140px;
-    height: 145px;
+    width: 120px;
+    height: 120px;
     min-width: 0;
   }
   .door-label {
-    font-size: 0.98rem;
-    padding-bottom: 13px;
+    font-size: 0.92rem;
+    padding-bottom: 10px;
   }
 }
 
