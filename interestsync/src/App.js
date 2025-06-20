@@ -166,7 +166,7 @@ function App() {
 
   return (
     <div className="app">
-      {/* Triangular SVG background */}
+      {/* Triangular SVG background (top) */}
       <div className="triangle-bg" aria-hidden="true">
         <svg
           width="100%"
@@ -203,6 +203,38 @@ function App() {
             <linearGradient id="triangle3" x1="0" y1="900" x2="1200" y2="190" gradientUnits="userSpaceOnUse">
               <stop stopColor="#d6eaff" />
               <stop offset="1" stopColor="#f6fafe" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      {/* Second triangle SVG anchored at the bottom */}
+      <div className="triangle-bg-bottom" aria-hidden="true">
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 1920 320"
+          preserveAspectRatio="none"
+          style={{ display: "block" }}
+        >
+          {/* Large bottom triangle for light modern look */}
+          <polygon
+            points="0,320 1920,320 1920,120 1420,180 800,70 250,290 0,200"
+            fill="url(#triangle-bottom)"
+            opacity="0.34"
+          />
+          <polygon
+            points="350,320 880,290 1680,130 1820,320"
+            fill="url(#triangle-bottom2)"
+            opacity="0.13"
+          />
+          <defs>
+            <linearGradient id="triangle-bottom" x1="1920" y1="320" x2="0" y2="150" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#e9eff7" />
+              <stop offset="1" stopColor="#b4cde4" />
+            </linearGradient>
+            <linearGradient id="triangle-bottom2" x1="350" y1="320" x2="1750" y2="150" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#b4cde4" />
+              <stop offset="0.7" stopColor="#fafdff" />
             </linearGradient>
           </defs>
         </svg>

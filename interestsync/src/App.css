@@ -61,6 +61,39 @@ body {
   overflow: hidden;
 }
 
+/* New: Bottom anchored triangle decorative SVG */
+.triangle-bg-bottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 240px;
+  min-height: 110px;
+  max-height: 27vh;
+  pointer-events: none;
+  z-index: 0; /* same as .triangle-bg, stays below all content */
+  overflow: hidden;
+  /* Faded elegantly upward with enough transparency for readability */
+}
+
+/* Assure main content stacking context is above both triangles */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1; /* was 0, ensure > .triangle-bg & .triangle-bg-bottom */
+}
+
+/* On smaller viewports, shrink bottom triangle height for mobile */
+@media (max-width: 700px) {
+  .triangle-bg-bottom {
+    height: 85px;
+    min-height: 40px;
+    max-height: 160px;
+  }
+}
+
 .navbar {
   background-color: var(--base-dark);
   padding: 16px;
