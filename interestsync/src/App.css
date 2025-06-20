@@ -13,6 +13,24 @@
   --navText-hover: #4A97C9;
 }
 
+/* Door Button Unique Colors */
+:root {
+  --door-tech-bg: linear-gradient(160deg, #eaf6fb 60%, #46a4eb 100%);
+  --door-tech-knob: #2280b1;
+  --door-sustainable-bg: linear-gradient(160deg, #eafaf2 65%, #47d791 100%);
+  --door-sustainable-knob: #35a865;
+  --door-travel-bg: linear-gradient(160deg, #fff9ec 60%, #ffbb49 100%);
+  --door-travel-knob: #e89909;
+  --door-food-bg: linear-gradient(160deg, #fff2f3 60%, #ff6969 100%);
+  --door-food-knob: #c53143;
+  --door-services-bg: linear-gradient(160deg, #f4f1fc 60%, #b484ee 100%);
+  --door-services-knob: #7c5ad1;
+  --door-fitness-bg: linear-gradient(160deg, #f1fff7 60%, #60e4ac 100%);
+  --door-fitness-knob: #2ab397;
+  --door-elderly-bg: linear-gradient(160deg, #f9f9f5 60%, #ccc4b5 100%);
+  --door-elderly-knob: #988c77;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -175,7 +193,6 @@ body {
   color: var(--navText-hover);
 }
 
-
 .page-container {
   margin-top: 72px;
   margin-bottom: 40px;
@@ -227,7 +244,6 @@ body {
 }
 
 .door-btn {
-  background: linear-gradient(160deg, #E9EFF7 80%, #d1dae7 100%);
   border: none;
   outline: none;
   border-radius: 32px 32px 12px 12px/48px 48px 15px 15px;
@@ -239,23 +255,11 @@ body {
   justify-content: center;
   cursor: pointer;
   position: relative;
-  transition: transform 0.16s cubic-bezier(0.24,0.7,0.33,1), box-shadow .22s;
   margin-top: 0;
-}
-
-.door-btn:before {
-  /* handle for the "doorknob" */
-  content: "";
-  position: absolute;
-  left: 24px;
-  top: 48%;
-  width: 14px;
-  height: 14px;
-  background: linear-gradient(120deg, #b1c1da 60%, #cbd9ee 100%);
-  border-radius: 50%;
-  box-shadow: 0 2px 7px 0 #B8C7DC3a;
-  border: 1.7px solid #B4CDE4;
-  z-index: 2;
+  transition: 
+    background 0.24s cubic-bezier(0.55,0.11,0.1,1), 
+    box-shadow .22s,
+    transform 0.16s cubic-bezier(0.24,0.7,0.33,1);
 }
 
 .door-btn:active,
@@ -265,7 +269,7 @@ body {
 }
 
 .door-btn:hover {
-  background: linear-gradient(160deg, #d1dae7 60%, #b4cde4 100%);
+  filter: brightness(1.07) contrast(1.1);
   box-shadow: 0 8px 40px 0 rgba(50, 90, 150, 0.18);
   outline: none;
 }
@@ -279,11 +283,89 @@ body {
   padding: 0 12px 22px 12px;
   line-height: 1.27;
   letter-spacing: .02rem;
-  /* Subtle shadow for pop and legibility */
   text-shadow: 0 2px 5px #E9EFF7cc, 0 1.5px #b4cde4, 0 1.5px #E9EFF7;
-  /* vertically align at bottom: already handled by flex alignment */
 }
 
+/* UNIQUE DOOR COLORS */
+.door-btn-tech {
+  background: var(--door-tech-bg);
+}
+.door-btn-tech:before {
+  background: var(--door-tech-knob);
+  border-color: #61b8e6;
+}
+
+.door-btn-sustainable {
+  background: var(--door-sustainable-bg);
+}
+.door-btn-sustainable:before {
+  background: var(--door-sustainable-knob);
+  border-color: #7be0af;
+}
+
+.door-btn-travel {
+  background: var(--door-travel-bg);
+}
+.door-btn-travel:before {
+  background: var(--door-travel-knob);
+  border-color: #FFD486;
+}
+
+.door-btn-food {
+  background: var(--door-food-bg);
+}
+.door-btn-food:before {
+  background: var(--door-food-knob);
+  border-color: #ffb4b4;
+}
+
+.door-btn-services {
+  background: var(--door-services-bg);
+}
+.door-btn-services:before {
+  background: var(--door-services-knob);
+  border-color: #ccb9f8;
+}
+
+.door-btn-fitness {
+  background: var(--door-fitness-bg);
+}
+.door-btn-fitness:before {
+  background: var(--door-fitness-knob);
+  border-color: #76f6cc;
+}
+
+.door-btn-elderly {
+  background: var(--door-elderly-bg);
+}
+.door-btn-elderly:before {
+  background: var(--door-elderly-knob);
+  border-color: #e3dece;
+}
+
+/* "Knob" styling: all doors get a consistent position, color overridden by the color class above */
+.door-btn:before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  top: 48%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 2px 7px 0 #B8C7DC3a;
+  border: 1.7px solid #B4CDE4;
+  z-index: 2;
+  background: linear-gradient(120deg, #b1c1da 60%, #cbd9ee 100%);
+}
+
+/* Accessibility: states for focus */
+.door-btn:focus-visible {
+  outline: 2.5px solid #294ad1;
+  outline-offset: 2.5px;
+  z-index: 2;
+}
+
+/* Responsive */
 @media (max-width: 650px) {
   .door-buttons-container {
     grid-template-columns: 1fr 1fr;

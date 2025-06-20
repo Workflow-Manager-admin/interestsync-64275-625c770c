@@ -5,14 +5,15 @@ import GroupLogo from "./GroupLogo";
 
 // PUBLIC_INTERFACE
 function App() {
+  // Define doors with label and unique color class
   const doorButtons = [
-    "Tech Solutions",
-    "Sustainable Solutions",
-    "Travel Solutions",
-    "Food & Beverages",
-    "Services",
-    "Fitness & Beauty Market",
-    "Elderly Help Solutions",
+    { label: "Tech Solutions", className: "door-btn-tech" },
+    { label: "Sustainable Solutions", className: "door-btn-sustainable" },
+    { label: "Travel Solutions", className: "door-btn-travel" },
+    { label: "Food & Beverages", className: "door-btn-food" },
+    { label: "Services", className: "door-btn-services" },
+    { label: "Fitness & Beauty Market", className: "door-btn-fitness" },
+    { label: "Elderly Help Solutions", className: "door-btn-elderly" },
   ];
 
   return (
@@ -34,8 +35,8 @@ function App() {
         }}
       >
         <div className="door-buttons-container">
-          {doorButtons.map((label, idx) => (
-            <button className="door-btn" key={label}>
+          {doorButtons.map(({ label, className }) => (
+            <button className={`door-btn ${className}`} key={label} tabIndex={0}>
               <span className="door-label">{label}</span>
             </button>
           ))}
