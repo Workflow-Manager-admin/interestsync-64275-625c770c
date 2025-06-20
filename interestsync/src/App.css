@@ -43,15 +43,31 @@ body {
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  color: var(--navText);
+}
+
+.logo > svg {
+  display: block;
+  vertical-align: middle;
+  height: 34px;
+  width: 34px;
+}
+
+.logo-text {
+  font-size: 1.35rem;
+  color: var(--navText);
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 .logo-symbol {
-  color: var(--base-light);
+  /* removed: was for old star icon, not needed now */
 }
 
 .container {

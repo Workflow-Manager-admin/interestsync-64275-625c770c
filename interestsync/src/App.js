@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { theme } from "./theme";
+import GroupLogo from "./GroupLogo";
 
 // PUBLIC_INTERFACE
 function App() {
@@ -9,8 +10,8 @@ function App() {
       <nav className="navbar">
         <div className="container" style={{ display: "flex", justifyContent: "flex-start" }}>
           <div className="logo">
-            <span className="logo-symbol" style={{ color: theme.colors.accent }}>★</span>
-            InterestSync
+            <GroupLogo size={36} />
+            <span className="logo-text">InterestSync</span>
           </div>
         </div>
       </nav>
