@@ -10,19 +10,85 @@ import GroupLogo from "./GroupLogo";
 function App() {
   // Door labels/colors
   const doorButtons = [
-    { label: "Tech Solutions", className: "door-btn-tech" },
-    { label: "Sustainable Solutions", className: "door-btn-sustainable" },
-    { label: "Travel Solutions", className: "door-btn-travel" },
-    { label: "Food & Beverages", className: "door-btn-food" },
-    { label: "Services", className: "door-btn-services" },
-    { label: "Fitness & Beauty Market", className: "door-btn-fitness" },
-    { label: "Elderly Help Solutions", className: "door-btn-elderly" },
+    { label: "Tech Solutions", className: "door-btn-tech", key: "tech" },
+    { label: "Sustainable Solutions", className: "door-btn-sustainable", key: "sustainable" },
+    { label: "Travel Solutions", className: "door-btn-travel", key: "travel" },
+    { label: "Food & Beverages", className: "door-btn-food", key: "food" },
+    { label: "Services", className: "door-btn-services", key: "services" },
+    { label: "Fitness & Beauty Market", className: "door-btn-fitness", key: "fitness" },
+    { label: "Elderly Help Solutions", className: "door-btn-elderly", key: "elderly" },
   ];
+
+  // Mock registration data grouped by field key
+  const mockRegistrations = {
+    tech: [
+      { name: "Alice Johnson", role: "Software Engineer", contact: "alicej@example.com" },
+      { name: "Bob Lee", role: "Product Designer", contact: "bob.lee@company.com" },
+      { name: "Priya Nair", role: "Tech Lead", contact: "priya.nair@email.com" },
+    ],
+    sustainable: [
+      { name: "Carlos Rivera", role: "Eco Consultant", contact: "crivera@greenmail.com" },
+      { name: "Fatima Elmoughni", role: "Sustainability Specialist", contact: "fatima@sustain.org" },
+    ],
+    travel: [
+      { name: "Jin Hwan", role: "Tour Planner", contact: "jin.hwan@travelsite.com" }
+    ],
+    food: [
+      { name: "Sara Kim", role: "Nutritionist", contact: "sara.kim@example.com" },
+      { name: "Olivia Parker", role: "Chef", contact: "olivia.p@foodnet.com" }
+    ],
+    services: [
+      { name: "Tomás Almeida", role: "Support Specialist", contact: "tomas@help.com" }
+    ],
+    fitness: [
+      { name: "Nina Petrova", role: "Yoga Instructor", contact: "ninap@yogafit.com" }
+    ],
+    elderly: [
+      { name: "Haruto Sato", role: "Care Volunteer", contact: "haruto@volunteer.com" }
+    ]
+  };
 
   // State management for both Ideator and Compats modal logic
   const [formOpen, setFormOpen] = useState(false);        // Controls if a modal is open
   const [modalType, setModalType] = useState("ideator");  // "ideator" or "compats"
   const formRef = useRef(null);
+
+  // State for registration (door list) modal
+  const [regListOpen, setRegListOpen] = useState(false);
+  const [selectedField, setSelectedField] = useState(null); // key, e.g., "tech"
+  const regListModalRef = useRef(null);
+
+  // PUBLIC_INTERFACE
+  function handleDoorClick(fieldKey) {
+    setSelectedField(fieldKey);
+    setRegListOpen(true);
+  }
+
+  // PUBLIC_INTERFACE
+  function handleRegListModalClose() {
+    setRegListOpen(false);
+    setSelectedField(null);
+  }
+
+  // Close the registration modal on outside click or escape
+  useEffect(() => {
+    if (!regListOpen) return;
+    function handleEscape(e) {
+      if (e.key === "Escape") handleRegListModalClose();
+    }
+    function handleClick(e) {
+      if (regListModalRef.current && !regListModalRef.current.contains(e.target)) {
+        handleRegListModalClose();
+      }
+    }
+    document.addEventListener("keydown", handleEscape);
+    document.addEventListener("mousedown", handleClick);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [regListOpen]);
+
 
   // Ideator form state
   const [contact, setContact] = useState("");
@@ -481,6 +547,144 @@ function App() {
           </div>
         </div>
       )}
+      {/* Registration List Modal (for door buttons) */}
+      {regListOpen && selectedField && (
+        <div
+          className="modal-overlay"
+          style={{
+            position: "fixed",
+            top: 0, left: 0,
+            width: "100vw", height: "100vh",
+            background: "rgba(33, 82, 124, 0.15)",
+            zIndex: 1300,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <div
+            ref={regListModalRef}
+            className="modal-form"
+            style={{
+              background: "#fff",
+              borderRadius: 13,
+              boxShadow: "0 8px 64px rgba(50,98,170,0.22), 0 1.5px 0 #b4cde422 inset",
+              padding: "28px 32px 22px",
+              minWidth: 300,
+              maxWidth: "96vw",
+              width: 370,
+              outline: "none",
+              animation: "fadeIn .22s cubic-bezier(.17,.67,.43,1)",
+              position: "relative"
+            }}
+            tabIndex={-1}
+            aria-modal="true"
+            aria-label="Registered People List"
+          >
+            <div style={{
+              fontSize: "1.32rem",
+              color: "var(--navText, #22324f)",
+              fontWeight: 650,
+              letterSpacing: "2px",
+              marginBottom: 9,
+              display: "flex",
+              alignItems: "center",
+              gap: 8
+            }}>
+              <span>
+                {doorButtons.find(btn => btn.key === selectedField)?.label}
+              </span>
+              <span
+                style={{
+                  fontSize: 14,
+                  color: "#2196F3",
+                  background: "#eaf6fb",
+                  borderRadius: 10,
+                  padding: "2px 8px",
+                  marginLeft: 4,
+                  fontWeight: 500,
+                  letterSpacing: "0.7px"
+                }}
+              >
+                {mockRegistrations[selectedField]?.length || 0} people
+              </span>
+            </div>
+            <div style={{
+              minHeight: 44,
+              marginBottom: 14,
+              marginTop: 4,
+            }}>
+              {mockRegistrations[selectedField] && mockRegistrations[selectedField].length > 0 ? (
+                <ul style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0
+                }}>
+                  {mockRegistrations[selectedField].map((p, idx) => (
+                    <li key={p.name + idx}
+                        style={{
+                          background: idx % 2 === 0 ? "#f5f7fa" : "#eef4fa",
+                          borderRadius: 6,
+                          padding: "8px 10px 7px 12px",
+                          marginBottom: 9,
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 2,
+                          boxShadow: "0 1.5px 0 #b4cde411 inset"
+                        }}
+                    >
+                      <span style={{
+                        color: "#22324f",
+                        fontWeight: 600,
+                        fontSize: "1.04rem"
+                      }}>{p.name}</span>
+                      <span style={{
+                        color: "#4A97C9",
+                        fontWeight: 500,
+                        fontSize: 13,
+                        marginTop: 0
+                      }}>
+                        {p.role}
+                        <span style={{
+                          color: "#888",
+                          fontWeight: 400,
+                          fontSize: 12,
+                          marginLeft: 6
+                        }}>{p.contact}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div style={{
+                  color: "#888",
+                  fontStyle: "italic",
+                  fontSize: "1.07rem"
+                }}>
+                  No registrations yet.
+                </div>
+              )}
+            </div>
+            <button
+              style={{
+                position: "absolute",
+                right: 12, top: 8,
+                background: "none",
+                border: "none",
+                fontSize: 22,
+                color: "#4A97C9",
+                cursor: "pointer"
+              }}
+              onClick={handleRegListModalClose}
+              tabIndex={0}
+              aria-label="Close People List"
+              title="Close"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
       <main
         className="flex-center"
         style={{
@@ -490,8 +694,14 @@ function App() {
         }}
       >
         <div className="door-buttons-container">
-          {doorButtons.map(({ label, className }) => (
-            <button className={`door-btn ${className}`} key={label} tabIndex={0}>
+          {doorButtons.map(({ label, className, key }) => (
+            <button
+              className={`door-btn ${className}`}
+              key={label}
+              tabIndex={0}
+              onClick={() => handleDoorClick(key)}
+              aria-label={`See who registered for ${label}`}
+            >
               <span className="door-label">{label}</span>
             </button>
           ))}
