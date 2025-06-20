@@ -44,6 +44,21 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 0;
+}
+
+/* Triangular SVG background for homepage */
+.triangle-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 90vh;
+  pointer-events: none;
+  z-index: 0;
+  /* Layer behind all content */
+  overflow: hidden;
 }
 
 .navbar {

@@ -166,6 +166,47 @@ function App() {
 
   return (
     <div className="app">
+      {/* Triangular SVG background */}
+      <div className="triangle-bg" aria-hidden="true">
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 1920 900"
+          preserveAspectRatio="none"
+          style={{ display: "block" }}
+        >
+          {/* Large soft triangles, pastel-blues and subtle gradients for light theme */}
+          <polygon
+            points="0,0 1400,0 850,700"
+            fill="url(#triangle1)"
+            opacity="0.20"
+          />
+          <polygon
+            points="300,900 1920,0 1920,650"
+            fill="url(#triangle2)"
+            opacity="0.14"
+          />
+          <polygon
+            points="0,900 600,900 1800,200"
+            fill="url(#triangle3)"
+            opacity="0.11"
+          />
+          <defs>
+            <linearGradient id="triangle1" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#e9eff7" />
+              <stop offset="1" stopColor="#b4cde4" />
+            </linearGradient>
+            <linearGradient id="triangle2" x1="1920" y1="0" x2="400" y2="900" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#b4cde4" />
+              <stop offset="1" stopColor="#e9eff7" />
+            </linearGradient>
+            <linearGradient id="triangle3" x1="0" y1="900" x2="1200" y2="190" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#d6eaff" />
+              <stop offset="1" stopColor="#f6fafe" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
       <nav className="navbar">
         <div
           className="container"
