@@ -554,8 +554,22 @@ body {
   border-radius: 50%;
   box-shadow: 0 2px 7px 0 #B8C7DC3a;
   border: 1.7px solid #B4CDE4;
-  z-index: 2;
+  z-index: 0; /* Lowered, so content is above */
   background: linear-gradient(120deg, #b1c1da 60%, #cbd9ee 100%);
+}
+
+.door-label {
+  display: block;
+  color: #22324f;
+  font-weight: 600;
+  font-size: 1.13rem;
+  text-align: center;
+  padding: 0 12px 22px 12px;
+  line-height: 1.27;
+  letter-spacing: .02rem;
+  text-shadow: 0 2px 5px #E9EFF7cc, 0 1.5px #b4cde4, 0 1.5px #E9EFF7;
+  position: relative;
+  z-index: 2; /* Ensure text is above any pseudo-elements */
 }
 
 /* Accessibility: states for focus */
