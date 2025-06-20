@@ -19,10 +19,35 @@ function App() {
   return (
     <div className="app">
       <nav className="navbar">
-        <div className="container" style={{ display: "flex", justifyContent: "flex-start" }}>
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <div className="logo">
             <GroupLogo size={36} />
             <span className="logo-text">InterestSync</span>
+          </div>
+          <div className="nav-links-wrap">
+            <a
+              href="#ideator"
+              className="nav-link"
+              tabIndex={0}
+              style={{ minWidth: 80, textAlign: "center" }}
+            >
+              Ideator
+            </a>
+            <a
+              href="#compats"
+              className="nav-link"
+              tabIndex={0}
+              style={{ minWidth: 80, textAlign: "center" }}
+            >
+              Compats
+            </a>
           </div>
         </div>
       </nav>

@@ -70,6 +70,61 @@ body {
   color: var(--navText);
 }
 
+/* Navbar nav-links container */
+.nav-links-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-left: 32px;
+}
+
+/* nav-link style inherited; extra button-like for clarity */
+.nav-link {
+  display: inline-block;
+  color: var(--navText);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.08rem;
+  margin-left: 18px;
+  background: transparent;
+  padding: 6px 18px;
+  border-radius: 5px;
+  border: 1.7px solid transparent;
+  transition: color 0.15s, border-color 0.18s, background 0.14s;
+  cursor: pointer;
+  outline: none;
+}
+.nav-link:first-child {
+  margin-left: 10px;
+}
+.nav-link:focus,
+.nav-link:active {
+  border-color: var(--accent);
+  background: #f2f6fa;
+  color: var(--navText-hover);
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--navText-hover);
+  background: var(--nav-bg-darker);
+  border-color: #b4cde4;
+}
+
+/* Responsive navbar links for smaller screens */
+@media (max-width: 600px) {
+  .nav-links-wrap {
+    gap: 2px;
+    margin-left: 2px;
+  }
+  .nav-link {
+    margin-left: 8px;
+    font-size: 0.97rem;
+    padding: 4px 10px;
+  }
+}
+
+/* Rest: logo, container, etc. */
 .logo > svg {
   display: block;
   vertical-align: middle;
