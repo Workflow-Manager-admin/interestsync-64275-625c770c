@@ -235,14 +235,61 @@ body {
 .door-buttons-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   gap: 32px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 8px 24px 8px;
+  min-height: calc(100vh - 72px);
+  padding: 0 8px;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 1200px) {
+  .door-buttons-container {
+    gap: 24px;
+    max-width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* On smaller screens, allow wrapping for responsiveness but keep centering */
+@media (max-width: 950px) {
+  .door-buttons-container {
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+@media (max-width: 800px) {
+  .door-buttons-container {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  .door-buttons-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 @media (max-width: 1100px) {
