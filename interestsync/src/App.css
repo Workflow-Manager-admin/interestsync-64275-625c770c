@@ -6,7 +6,11 @@
   --text-color: #222;
   --text-secondary: #555;
   --border-color: #e0e0e0;
-  --nav-bg: #fff;
+  /* Bluish-grey for navbar: */
+  --nav-bg: #e9eff7;
+  --nav-bg-darker: #d1dae7;
+  --navText: #22324f;
+  --navText-hover: #4A97C9;
 }
 
 body {
@@ -125,16 +129,26 @@ body {
   background: var(--nav-bg);
   color: var(--navText);
   border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(33,150,243,0.03);
+  box-shadow: 0 2px 8px rgba(33, 82, 124, 0.07);
+  /* matches bluish-grey theme, increased shadow subtly */
+  transition: background 0.2s;
 }
+
 .logo {
-  color: var(--primary);
+  color: var(--navText);
   font-weight: 700;
   letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-symbol {
+  color: var(--accent);
 }
 
 .nav-link {
-  color: var(--text-color);
+  color: var(--navText);
   text-decoration: none;
   font-weight: 500;
   margin-left: 20px;
@@ -142,8 +156,9 @@ body {
 }
 .nav-link:hover,
 .nav-link.active {
-  color: var(--primary);
+  color: var(--navText-hover);
 }
+
 
 .page-container {
   margin-top: 72px;

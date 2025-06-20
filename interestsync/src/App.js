@@ -9,7 +9,7 @@ function App() {
       <nav className="navbar">
         <div className="container" style={{ display: "flex", justifyContent: "flex-start" }}>
           <div className="logo">
-            <span style={{ color: theme.colors.primary }}>★</span>
+            <span className="logo-symbol" style={{ color: theme.colors.accent }}>★</span>
             InterestSync
           </div>
         </div>
