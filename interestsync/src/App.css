@@ -213,3 +213,94 @@ body {
   color: var(--text-secondary);
   font-size: 1rem;
 }
+
+/* --- Door Buttons for Home Page --- */
+.door-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 36px 28px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 8px 24px 8px;
+  justify-items: center;
+}
+
+.door-btn {
+  background: linear-gradient(160deg, #E9EFF7 80%, #d1dae7 100%);
+  border: none;
+  outline: none;
+  border-radius: 32px 32px 12px 12px/48px 48px 15px 15px;
+  width: 168px;
+  height: 186px;
+  box-shadow: 0 4px 24px 0 rgba(55, 69, 92, 0.12), 0 1.5px 0 #B4CDE4 inset;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.16s cubic-bezier(0.24,0.7,0.33,1), box-shadow .22s;
+  margin-top: 0;
+}
+
+.door-btn:before {
+  /* handle for the "doorknob" */
+  content: "";
+  position: absolute;
+  left: 24px;
+  top: 48%;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(120deg, #b1c1da 60%, #cbd9ee 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 7px 0 #B8C7DC3a;
+  border: 1.7px solid #B4CDE4;
+  z-index: 2;
+}
+
+.door-btn:active,
+.door-btn:focus {
+  transform: translateY(4px) scale(0.96);
+  box-shadow: 0 2px 8px 0 rgba(55, 69, 92, 0.17);
+}
+
+.door-btn:hover {
+  background: linear-gradient(160deg, #d1dae7 60%, #b4cde4 100%);
+  box-shadow: 0 8px 40px 0 rgba(50, 90, 150, 0.18);
+  outline: none;
+}
+
+.door-label {
+  display: block;
+  color: #22324f;
+  font-weight: 600;
+  font-size: 1.13rem;
+  text-align: center;
+  padding: 0 12px 22px 12px;
+  line-height: 1.27;
+  letter-spacing: .02rem;
+  /* Subtle shadow for pop and legibility */
+  text-shadow: 0 2px 5px #E9EFF7cc, 0 1.5px #b4cde4, 0 1.5px #E9EFF7;
+  /* vertically align at bottom: already handled by flex alignment */
+}
+
+@media (max-width: 650px) {
+  .door-buttons-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 14px;
+    padding: 28px 0 0 0;
+  }
+  .door-btn {
+    width: 140px;
+    height: 145px;
+    min-width: 0;
+  }
+  .door-label {
+    font-size: 0.98rem;
+    padding-bottom: 13px;
+  }
+}
+
+@media (max-width: 400px) {
+  .door-btn { width: 110px; height: 105px; }
+}

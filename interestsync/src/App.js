@@ -5,6 +5,16 @@ import GroupLogo from "./GroupLogo";
 
 // PUBLIC_INTERFACE
 function App() {
+  const doorButtons = [
+    "Tech Solutions",
+    "Sustainable Solutions",
+    "Travel Solutions",
+    "Food & Beverages",
+    "Services",
+    "Fitness & Beauty Market",
+    "Elderly Help Solutions",
+  ];
+
   return (
     <div className="app">
       <nav className="navbar">
@@ -23,7 +33,13 @@ function App() {
           background: theme.colors.background,
         }}
       >
-        {/* Main content can go here */}
+        <div className="door-buttons-container">
+          {doorButtons.map((label, idx) => (
+            <button className="door-btn" key={label}>
+              <span className="door-label">{label}</span>
+            </button>
+          ))}
+        </div>
       </main>
     </div>
   );
