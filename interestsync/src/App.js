@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
+// InterestSync main app
 import "./App.css";
 import { theme } from "./theme";
 import GroupLogo from "./GroupLogo";
 
-// PUBLIC_INTERFACE
+/**
+ * Main InterestSync App
+ */
 function App() {
-  // Define doors with label and unique color class
+  // Door labels/colors
   const doorButtons = [
     { label: "Tech Solutions", className: "door-btn-tech" },
     { label: "Sustainable Solutions", className: "door-btn-sustainable" },
@@ -16,13 +19,23 @@ function App() {
     { label: "Elderly Help Solutions", className: "door-btn-elderly" },
   ];
 
-  // State for Ideator form modal visibility and form fields
-  const [formOpen, setFormOpen] = useState(false);
-  const [contact, setContact] = useState("");
-  const [location, setLocation] = useState("");
+  // State management for both Ideator and Compats modal logic
+  const [formOpen, setFormOpen] = useState(false);        // Controls if a modal is open
+  const [modalType, setModalType] = useState("ideator");  // "ideator" or "compats"
   const formRef = useRef(null);
 
-  // Close modal when clicking outside of form or pressing Escape
+  // Ideator form state
+  const [contact, setContact] = useState("");
+  const [location, setLocation] = useState("");
+
+  // Compats form state
+  const [compatsName, setCompatsName] = useState("");
+  const [compatsWriteup, setCompatsWriteup] = useState("");
+  const [compatsArea, setCompatsArea] = useState("");
+  const [compatsContact, setCompatsContact] = useState("");
+  const [compatsEmail, setCompatsEmail] = useState("");
+
+  // Close modal on outside click or escape
   useEffect(() => {
     if (!formOpen) return;
     function handleEscape(e) {
@@ -44,13 +57,26 @@ function App() {
   // PUBLIC_INTERFACE
   function handleNavIdeatorClick(e) {
     e.preventDefault();
+    setModalType("ideator");
     setFormOpen(true);
+  }
+
+  // PUBLIC_INTERFACE
+  function handleNavCompatsClick(e) {
+    e.preventDefault();
+    setModalType("compats");
+    setFormOpen(true);
+  }
+
+  // PUBLIC_INTERFACE
+  function handleFormClose() {
+    setFormOpen(false);
   }
 
   // PUBLIC_INTERFACE
   function handleFormSubmit(e) {
     e.preventDefault();
-    // Add logic to handle form submission (e.g., send data to backend) if needed
+    // Add logic to handle form submission (e.g., send to backend)
     alert(`Contact: ${contact}\nLocation: ${location}`);
     setContact("");
     setLocation("");
@@ -58,7 +84,17 @@ function App() {
   }
 
   // PUBLIC_INTERFACE
-  function handleFormClose() {
+  function handleCompatsSubmit(e) {
+    e.preventDefault();
+    // Add logic for Compats modal submit — for prototype, just alert
+    alert(
+      `Name: ${compatsName}\nWriteup: ${compatsWriteup}\nArea of Interest: ${compatsArea}\nContact: ${compatsContact}\nEmail: ${compatsEmail}`
+    );
+    setCompatsName("");
+    setCompatsWriteup("");
+    setCompatsArea("");
+    setCompatsContact("");
+    setCompatsEmail("");
     setFormOpen(false);
   }
 
@@ -92,6 +128,7 @@ function App() {
               className="nav-link"
               tabIndex={0}
               style={{ minWidth: 80, textAlign: "center" }}
+              onClick={handleNavCompatsClick}
             >
               Compats
             </a>
@@ -130,7 +167,7 @@ function App() {
             }}
             tabIndex={-1}
             aria-modal="true"
-            aria-label="Ideator Form"
+            aria-label={modalType === "ideator" ? "Ideator Form" : "Compats Form"}
           >
             <div
               style={{
@@ -141,101 +178,289 @@ function App() {
                 marginBottom: 9
               }}
             >
-              Ideator Form
+              {modalType === "ideator" ? "Ideator Form" : "Compats Form"}
             </div>
-            <form onSubmit={handleFormSubmit}>
-              <label
-                htmlFor="ideator-contact"
-                style={{
-                  display: "block",
-                  fontWeight: 500,
-                  marginBottom: 5,
-                  marginTop: 12,
-                  color: "var(--primary, #4CAF50)",
-                  fontSize: "1.04rem"
-                }}
-              >
-                Contact
-              </label>
-              <input
-                id="ideator-contact"
-                type="text"
-                value={contact}
-                onChange={e => setContact(e.target.value)}
-                placeholder="Your contact info"
-                required
-                autoFocus
-                style={{
-                  width: "100%",
-                  padding: "9px 12px",
-                  border: "1.5px solid var(--border-color)",
-                  borderRadius: 6,
-                  fontSize: "1.08rem",
-                  color: "var(--text-color,#222)",
-                  marginBottom: 12,
-                  background: "#f5f7fa"
-                }}
-              />
-              <label
-                htmlFor="ideator-location"
-                style={{
-                  display: "block",
-                  fontWeight: 500,
-                  marginBottom: 5,
-                  color: "var(--primary, #4CAF50)",
-                  fontSize: "1.04rem"
-                }}
-              >
-                Location
-              </label>
-              <input
-                id="ideator-location"
-                type="text"
-                value={location}
-                onChange={e => setLocation(e.target.value)}
-                placeholder="Your location"
-                required
-                style={{
-                  width: "100%",
-                  padding: "9px 12px",
-                  border: "1.5px solid var(--border-color)",
-                  borderRadius: 6,
-                  fontSize: "1.08rem",
-                  color: "var(--text-color,#222)",
-                  background: "#f5f7fa",
-                  marginBottom: 18
-                }}
-              />
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: 12 }}>
-                <button
-                  type="button"
-                  className="btn"
+            {modalType === "ideator"
+              ? (
+              <form onSubmit={handleFormSubmit}>
+                <label
+                  htmlFor="ideator-contact"
                   style={{
-                    backgroundColor: "#f2f6fa",
-                    color: "var(--primary, #4CAF50)",
-                    border: "1px solid var(--border-color)",
-                    borderRadius: 5,
+                    display: "block",
                     fontWeight: 500,
+                    marginBottom: 5,
+                    marginTop: 12,
+                    color: "var(--primary, #4CAF50)",
+                    fontSize: "1.04rem"
                   }}
-                  onClick={handleFormClose}
                 >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="btn"
+                  Contact
+                </label>
+                <input
+                  id="ideator-contact"
+                  type="text"
+                  value={contact}
+                  onChange={e => setContact(e.target.value)}
+                  placeholder="Your contact info"
+                  required
+                  autoFocus
                   style={{
-                    background: "var(--primary,#4CAF50)",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 5,
-                    fontWeight: 600
+                    width: "100%",
+                    padding: "9px 12px",
+                    border: "1.5px solid var(--border-color)",
+                    borderRadius: 6,
+                    fontSize: "1.08rem",
+                    color: "var(--text-color,#222)",
+                    marginBottom: 12,
+                    background: "#f5f7fa"
+                  }}
+                />
+                <label
+                  htmlFor="ideator-location"
+                  style={{
+                    display: "block",
+                    fontWeight: 500,
+                    marginBottom: 5,
+                    color: "var(--primary, #4CAF50)",
+                    fontSize: "1.04rem"
                   }}
                 >
-                  Submit
-                </button>
-              </div>
-            </form>
+                  Location
+                </label>
+                <input
+                  id="ideator-location"
+                  type="text"
+                  value={location}
+                  onChange={e => setLocation(e.target.value)}
+                  placeholder="Your location"
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "9px 12px",
+                    border: "1.5px solid var(--border-color)",
+                    borderRadius: 6,
+                    fontSize: "1.08rem",
+                    color: "var(--text-color,#222)",
+                    background: "#f5f7fa",
+                    marginBottom: 18
+                  }}
+                />
+                <div style={{ display: "flex", justifyContent: "flex-end", gap: 12 }}>
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{
+                      backgroundColor: "#f2f6fa",
+                      color: "var(--primary, #4CAF50)",
+                      border: "1px solid var(--border-color)",
+                      borderRadius: 5,
+                      fontWeight: 500,
+                    }}
+                    onClick={handleFormClose}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn"
+                    style={{
+                      background: "var(--primary,#4CAF50)",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: 5,
+                      fontWeight: 600
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <form onSubmit={handleCompatsSubmit}>
+                <label
+                  htmlFor="compats-name"
+                  style={{
+                    display: "block",
+                    fontWeight: 500,
+                    marginBottom: 5,
+                    marginTop: 12,
+                    color: "var(--primary, #4CAF50)",
+                    fontSize: "1.04rem"
+                  }}
+                >
+                  Name
+                </label>
+                <input
+                  id="compats-name"
+                  type="text"
+                  value={compatsName}
+                  onChange={e => setCompatsName(e.target.value)}
+                  placeholder="Your name"
+                  required
+                  autoFocus
+                  style={{
+                    width: "100%",
+                    padding: "9px 12px",
+                    border: "1.5px solid var(--border-color)",
+                    borderRadius: 6,
+                    fontSize: "1.08rem",
+                    color: "var(--text-color,#222)",
+                    marginBottom: 12,
+                    background: "#f5f7fa"
+                  }}
+                />
+                <label
+                  htmlFor="compats-writeup"
+                  style={{
+                    display: "block",
+                    fontWeight: 500,
+                    marginBottom: 5,
+                    color: "var(--primary, #4CAF50)",
+                    fontSize: "1.04rem"
+                  }}
+                >
+                  Writeup
+                </label>
+                <textarea
+                  id="compats-writeup"
+                  value={compatsWriteup}
+                  onChange={e => setCompatsWriteup(e.target.value)}
+                  placeholder="Tell us about yourself or your interests"
+                  required
+                  rows={3}
+                  style={{
+                    width: "100%",
+                    padding: "9px 12px",
+                    border: "1.5px solid var(--border-color)",
+                    borderRadius: 6,
+                    fontSize: "1.05rem",
+                    color: "var(--text-color,#222)",
+                    background: "#f5f7fa",
+                    marginBottom: 12,
+                    resize: "vertical",
+                  }}
+                />
+                <label
+                  htmlFor="compats-area"
+                  style={{
+                    display: "block",
+                    fontWeight: 500,
+                    marginBottom: 5,
+                    color: "var(--primary, #4CAF50)",
+                    fontSize: "1.04rem"
+                  }}
+                >
+                  Area of Interest
+                </label>
+                <input
+                  id="compats-area"
+                  type="text"
+                  value={compatsArea}
+                  onChange={e => setCompatsArea(e.target.value)}
+                  placeholder="Area of interest (eg. AI, health, travel...)"
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "9px 12px",
+                    border: "1.5px solid var(--border-color)",
+                    borderRadius: 6,
+                    fontSize: "1.08rem",
+                    color: "var(--text-color,#222)",
+                    background: "#f5f7fa",
+                    marginBottom: 12,
+                  }}
+                />
+                <label
+                  htmlFor="compats-contact"
+                  style={{
+                    display: "block",
+                    fontWeight: 500,
+                    marginBottom: 5,
+                    color: "var(--primary, #4CAF50)",
+                    fontSize: "1.04rem"
+                  }}
+                >
+                  Contact
+                </label>
+                <input
+                  id="compats-contact"
+                  type="text"
+                  value={compatsContact}
+                  onChange={e => setCompatsContact(e.target.value)}
+                  placeholder="Your contact info"
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "9px 12px",
+                    border: "1.5px solid var(--border-color)",
+                    borderRadius: 6,
+                    fontSize: "1.08rem",
+                    color: "var(--text-color,#222)",
+                    marginBottom: 12,
+                    background: "#f5f7fa"
+                  }}
+                />
+                <label
+                  htmlFor="compats-email"
+                  style={{
+                    display: "block",
+                    fontWeight: 500,
+                    marginBottom: 5,
+                    color: "var(--primary, #4CAF50)",
+                    fontSize: "1.04rem"
+                  }}
+                >
+                  Email
+                </label>
+                <input
+                  id="compats-email"
+                  type="email"
+                  value={compatsEmail}
+                  onChange={e => setCompatsEmail(e.target.value)}
+                  placeholder="Your email address"
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "9px 12px",
+                    border: "1.5px solid var(--border-color)",
+                    borderRadius: 6,
+                    fontSize: "1.08rem",
+                    color: "var(--text-color,#222)",
+                    background: "#f5f7fa",
+                    marginBottom: 18
+                  }}
+                />
+                <div style={{ display: "flex", justifyContent: "flex-end", gap: 12 }}>
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{
+                      backgroundColor: "#f2f6fa",
+                      color: "var(--primary, #4CAF50)",
+                      border: "1px solid var(--border-color)",
+                      borderRadius: 5,
+                      fontWeight: 500,
+                    }}
+                    onClick={handleFormClose}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn"
+                    style={{
+                      background: "var(--primary,#4CAF50)",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: 5,
+                      fontWeight: 600
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            )}
             <button
               style={{
                 position: "absolute",
