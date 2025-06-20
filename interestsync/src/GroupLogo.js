@@ -2,7 +2,7 @@ import React from "react";
 
 // PUBLIC_INTERFACE
 /**
- * SVG logo depicting a group of people standing together, styled for InterestSync.
+ * SVG logo depicting a group of people standing together, styled for TeamUp.
  * Colors harmonize with the bluish-grey/light accent theme.
  */
 export default function GroupLogo({ size = 34 }) {
@@ -19,7 +19,7 @@ export default function GroupLogo({ size = 34 }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="InterestSync Logo: group of people"
+      aria-label="TeamUp Logo: group of people"
       style={{ display: "block" }}
     >
       {/* Center person */}

@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-// InterestSync main app
+ // TeamUp main app
 import "./App.css";
 import { theme } from "./theme";
 import GroupLogo from "./GroupLogo";
 
 /**
- * Main InterestSync App
+ * Main TeamUp App
  */
 function App() {
   // Door labels/colors
@@ -250,7 +250,7 @@ function App() {
         >
           <div className="logo">
             <GroupLogo size={36} />
-            <span className="logo-text">InterestSync</span>
+            <span className="logo-text">TeamUp</span>
           </div>
           <div className="nav-links-wrap">
             <a
